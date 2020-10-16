@@ -1,0 +1,59 @@
+<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=referrer content=never><title>mozik</title><script src=./static/reset.js></script><script src=./static/myQuery.js></script><link href=./static/animate.css rel=stylesheet><link href=./static/iconfont.css rel=stylesheet><script src=./static/mui.min.js></script><style>*{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box
+      }
+      html,body{
+        width: 100%;
+        height: 100%;
+        overflow: hidden
+      }
+      ul, ol, li {
+        list-style: none
+      }</style><link href=./static/css/app.c4533e8897e065a1d6b7528462ee791b.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=./static/js/manifest.3ad1d5771e9b13dbdad2.js></script><script type=text/javascript src=./static/js/vendor.6dbecd646f909eca6322.js></script><script type=text/javascript src=./static/js/app.0aed5bce958faab6883e.js></script></body><script>mui.init({
+    keyEventBind: {
+      backbutton: true // 打开back按键监听
+    }
+  })
+  /**
+   * 长按事件
+   * 首页长按 底部出现切换背景的tab
+   * */
+  $('#app').longTag(showBgList)
+  // show tab
+  function showBgList() {
+    let masked = document.querySelector('.masked')
+    let bgList = document.querySelector('.bgList')
+    // 获取 bgList 的样式表
+    let bgSty = bgList.currentStyle || window.getComputedStyle(bgList, null)
+    // 获取可视窗口的实际高度 宽度
+    let h = document.documentElement.clientHeight
+    masked.style.display = 'block'
+    let timer = setInterval(show, 8)
+    const k = 1.5
+    function show () {
+      bgList.style.bottom = parseInt(bgSty.bottom) + k + 'px'
+      if (parseInt(bgSty.bottom) === 0) {
+        clearInterval(timer)
+      }
+    }
+  }
+  // hide all background image list
+  $('.masked').tap(hideBgList)
+  function hideBgList () {
+    let maskedH = document.querySelector('.masked')
+    let bgListH = document.querySelector('.bgList')
+    // 获取 bgList 的样式表
+    let bgStyH = bgListH.currentStyle || window.getComputedStyle(bgListH, null)
+    // 获取可视窗口的实际高度 宽度
+    let h = document.documentElement.clientHeight
+    maskedH.style.display = 'none'
+    let timer = setInterval(hide, 8)
+    const n = -3
+    function hide () {
+      bgListH.style.bottom = parseInt(bgStyH.bottom) + n + 'px'
+      if (parseInt(bgStyH.bottom) <= -0.2 * h) {
+        clearInterval(timer)
+      }
+    }
+  }</script></html>
